@@ -71,7 +71,26 @@ class DoublyLinkedList {
         }
         this.length++;
         return list;
-
+    }
+    get(idx) {
+        if(idx < 0 || idx >= this.length ) return null;
+        if(idx <= this.length / 2) {
+            var counter = 0;
+            var current = this.head;
+            while(counter !== idx) {
+                current = current.next;
+                counter++;
+            }
+        }
+        if(idx > this.length / 2) {
+            var counter = this.length -1;
+            var current = this.tail;
+            while(counter !== idx) {
+                current = current.previous;
+                current--;
+            }
+        }
+        return current.val;
     }
 }
 var list = new DoublyLinkedList();
@@ -79,7 +98,6 @@ list.push("Frankie");
 list.push("Hussein");
 list.push("Cerina");
 list.push("Andrea");
-list.shift();
 list.unshift("Brenda");
 list.traverse();
-console.log(list)
+console.log("Retrived Index: " + list.get(0));
