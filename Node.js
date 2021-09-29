@@ -16,7 +16,6 @@ class DoublyLinkedList {
         while(current) {
             console.log(current.val);
             current = current.next;
-
         }
     }
     push(val) {
@@ -28,7 +27,6 @@ class DoublyLinkedList {
             this.tail.next = newNode;
             newNode.previous = this.tail;
             this.tail = newNode;
-        
         }
         this.length++;
     }
@@ -90,7 +88,29 @@ class DoublyLinkedList {
                 current--;
             }
         }
-        return current.val;
+        return current;
+    }
+    set(idx, val) {
+        var foundNode = this.get(idx); 
+        if(foundNode) {
+            foundNode.val = val;
+            return true;
+        }
+        return false;
+    }
+    insert(idx, val) {
+        if(idx < 0 || idx > this.length) return null;
+        if(idx === 0) return this.unshift(val);
+        if(idx === this.length) return this.push(val);
+        var newNode = new Node(val);
+        var beforeNode = this.get(idx - 1);
+        var afterNode = beforeNode.next;
+        beforeNode.next = newNode;
+        newNode.previous = beforeNode;
+        newNode.next = afterNode;
+        afterNode.previous = newNode;
+        this.length++;
+        return true;
     }
 }
 var list = new DoublyLinkedList();
@@ -99,5 +119,11 @@ list.push("Hussein");
 list.push("Cerina");
 list.push("Andrea");
 list.unshift("Brenda");
+// list.traverse();
+// console.log("Retrived Index: " + list.get(0));
+list.set(1,"Brianna");
+list.insert(0, "Jessica");
+list.insert(6, "Patty");
+list.insert(3, "Dalia");
+list.insert(1, "Maria");
 list.traverse();
-console.log("Retrived Index: " + list.get(0));
