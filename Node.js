@@ -112,9 +112,21 @@ class DoublyLinkedList {
         this.length++;
         return true;
     }
+    remove(idx) {
+        if(idx === 0) return this.shift();
+        if(idx < 0 || idx >= this.length) return null;
+        if(idx === this.length - 1) return this.pop();
+        var removedNode = this.get(idx);
+        removedNode.previous.next = removedNode.next;
+        removedNode.next.previous = removedNode.previous;
+        removedNode.next = null;
+        removedNode.previous = null;
+        this.length--;
+        return this;
+    }
 }
 var list = new DoublyLinkedList();
-list.push("Frankie");
+list.push("Slim");
 list.push("Hussein");
 list.push("Cerina");
 list.push("Andrea");
@@ -126,4 +138,12 @@ list.insert(0, "Jessica");
 list.insert(6, "Patty");
 list.insert(3, "Dalia");
 list.insert(1, "Maria");
+// list.traverse();
+list.remove(0);
+list.remove(0);
+list.remove(0);
+list.remove(3);
+list.remove(2);
+list.remove(1);
 list.traverse();
+console.log(list);
